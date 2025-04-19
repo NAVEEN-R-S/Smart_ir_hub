@@ -135,6 +135,8 @@ void TEST_Timer(void)
 void TEST_UART(void)
 {
     InitUART();
+
+    Message("UART test : Hello from CC32200 Launch pad!");
 }
 
 

@@ -84,15 +84,8 @@ void ClearTerm()
     Message("\33[2J\r");
 }
 
-void InitUART(void)
+void UARTPrintHeaderInfo(void)
 {
-
-    UARTPinMuxConfig();
-
-    InitTerm();
-
-    ClearTerm();
-//    DisplayBanner(APP_NAME);
     Message("\t\t****************************************************\n\r");
     Message("\t\t\t        CC3200 UART Echo Usage        \n\r");
     Message("\t\t Type in a string of alphanumeric characters and  \n\r");
@@ -101,6 +94,16 @@ void InitUART(void)
     Message("\t\t echo the string without waiting for enter command \n\r");
     Message("\t\t ****************************************************\n\r");
     Message("\n\n\n\r");
+}
+
+void InitUART(void)
+{
+
+    UARTPinMuxConfig();
+
+    InitTerm();
+
+    ClearTerm();
 
 }
 

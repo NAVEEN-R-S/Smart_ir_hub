@@ -25,5 +25,8 @@ extern unsigned char g_ucUARTBuffer[];
 
 static unsigned long __Errorlog;
 
+void Message(const char *str);
+void InitUART(void);
+
 
 #endif /* IR_UART_H_ */
