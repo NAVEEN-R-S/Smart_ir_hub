@@ -11,6 +11,7 @@ GEN_CMDS__FLAG :=
 
 ORDERED_OBJS += \
 "./ir.obj" \
+"./ir_uart.obj" \
 "./main.obj" \
 "./peripheral_test.obj" \
 "./startup_ccs.obj" \
@@ -159,8 +160,8 @@ smart_ir_hub.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "ir.obj" "main.obj" "peripheral_test.obj" "startup_ccs.obj" 
-	-$(RM) "ir.d" "main.d" "peripheral_test.d" "startup_ccs.d" 
+	-$(RM) "ir.obj" "ir_uart.obj" "main.obj" "peripheral_test.obj" "startup_ccs.obj" 
+	-$(RM) "ir.d" "ir_uart.d" "main.d" "peripheral_test.d" "startup_ccs.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

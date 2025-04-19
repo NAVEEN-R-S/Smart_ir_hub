@@ -11,6 +11,7 @@
 
 void Test_LED(void);
 void TEST_Timer(void);
+void TEST_UART(void);
 
 
 #endif /* PERIPHERAL_TEST_H_ */

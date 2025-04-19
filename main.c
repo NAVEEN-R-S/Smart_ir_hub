@@ -25,7 +25,8 @@ int main(void) {
     PRCMCC3200MCUInit();
 
 //    Test_LED();
-    TEST_Timer();
+//    TEST_Timer();
+    TEST_UART();
 
     while(1);
 

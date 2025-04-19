@@ -20,6 +20,8 @@
 #include "timer.h"
 #include "interrupt.h"
 
+#include "ir_uart.h"
+
 /*RED LED*/
 #define R_LED_GPIO_PIN 9
 
@@ -129,5 +131,11 @@ void TEST_Timer(void)
     while(1);
 
 }
+
+void TEST_UART(void)
+{
+    InitUART();
+}
+
 
 

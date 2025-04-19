@@ -25,6 +25,7 @@ peripheral_test.obj: C:/ti/CC3200SDK_1.5.0/cc3200-sdk/driverlib/rom_patch.h
 peripheral_test.obj: C:/ti/CC3200SDK_1.5.0/cc3200-sdk/driverlib/utils.h
 peripheral_test.obj: C:/ti/CC3200SDK_1.5.0/cc3200-sdk/driverlib/timer.h
 peripheral_test.obj: C:/ti/CC3200SDK_1.5.0/cc3200-sdk/driverlib/interrupt.h
+peripheral_test.obj: ../ir_uart.h
 
 ../peripheral_test.c: 
 C:/ti/ccsv8/tools/compiler/ti-cgt-arm_20.2.7.LTS/include/stdio.h: 
@@ -51,3 +52,4 @@ C:/ti/CC3200SDK_1.5.0/cc3200-sdk/driverlib/rom_patch.h:
 C:/ti/CC3200SDK_1.5.0/cc3200-sdk/driverlib/utils.h: 
 C:/ti/CC3200SDK_1.5.0/cc3200-sdk/driverlib/timer.h: 
 C:/ti/CC3200SDK_1.5.0/cc3200-sdk/driverlib/interrupt.h: 
+../ir_uart.h: 
