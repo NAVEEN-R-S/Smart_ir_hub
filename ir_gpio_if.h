@@ -1,7 +1,7 @@
 //*****************************************************************************
-// uart_if.h
+// gpio_if.h
 //
-// uart interface header file: Prototypes and Macros for UARTLogger
+// Defines and Macros for the GPIO interface.
 //
 // Copyright (C) 2014 Texas Instruments Incorporated - http://www.ti.com/
 //
@@ -36,8 +36,8 @@
 //
 //*****************************************************************************
 
-#ifndef __uart_if_H__
-#define __uart_if_H__
+#ifndef __GPIOIF_H__
+#define __GPIOIF_H__
 
 //*****************************************************************************
 //
@@ -50,37 +50,58 @@ extern "C"
 {
 #endif
 
-/****************************************************************************/
-/*                              MACROS                                      */
-/****************************************************************************/
-#define UART_BAUD_RATE  115200
-#define SYSCLK          80000000
-#define CONSOLE         UARTA0_BASE
-#define CONSOLE_PERIPH  PRCM_UARTA0
-//
-// Define the size of UART IF buffer for RX
-//
-#define UART_IF_BUFFER           64
+typedef enum
+{
+    NO_LED,
+    LED1 = 0x1, /* RED LED D7/GP9/Pin64 */
+    LED2 = 0x2, /* ORANGE LED D6/GP10/Pin1 */
+    LED3 = 0x4  /* GREEN LED D5/GP11/Pin2 */
 
+} ledEnum;
+
+typedef enum
+{
+    NO_LED_IND = NO_LED,
+    MCU_SENDING_DATA_IND = LED1,
+    MCU_ASSOCIATED_IND, /* Device associated to an AP */
+    MCU_IP_ALLOC_IND, /* Device acquired an IP */
+    MCU_SERVER_INIT_IND, /* Device connected to remote server */
+    MCU_CLIENT_CONNECTED_IND, /* Any client connects to device */
+    MCU_ON_IND,              /* Device SLHost invoked successfully */
+    MCU_EXECUTE_SUCCESS_IND, /* Task executed sucessfully */
+    MCU_EXECUTE_FAIL_IND, /* Task execution failed */
+    MCU_RED_LED_GPIO,   /* GP09 for LED RED as per LP 3.0 */
+    MCU_ORANGE_LED_GPIO,/* GP10 for LED ORANGE as per LP 3.0 */
+    MCU_GREEN_LED_GPIO, /* GP11 for LED GREEN as per LP 3.0 */
+    MCU_ALL_LED_IND
+} ledNames;
+
+//*****************************************************************************
 //
-// Define the UART IF buffer
+// API Function prototypes
 //
-extern unsigned char g_ucUARTBuffer[];
+//*****************************************************************************
+extern void GPIO_IF_GetPortNPin(unsigned char ucPin,
+                     unsigned int *puiGPIOPort,
+                     unsigned char *pucGPIOPin);
 
+extern void GPIO_IF_ConfigureNIntEnable(unsigned int uiGPIOPort,
+                                  unsigned char ucGPIOPin,
+                                  unsigned int uiIntType,
+                                  void (*pfnIntHandler)(void));
+extern void GPIO_IF_Set(unsigned char ucPin,
+             unsigned int uiGPIOPort,
+             unsigned char ucGPIOPin,
+             unsigned char ucGPIOValue);
 
-/****************************************************************************/
-/*                              FUNCTION PROTOTYPES                         */
-/****************************************************************************/
-extern void DispatcherUARTConfigure(void);
-extern void DispatcherUartSendPacket(unsigned char *inBuff, unsigned short usLength);
-extern int GetCmd(char *pcBuffer, unsigned int uiBufLen);
-extern void InitTerm(void);
-extern void ClearTerm(void);
-extern void Message(const char *format);
-extern void Error(char *format,...);
-extern int TrimSpace(char * pcInput);
-extern int Report(const char *format, ...);
-
+extern unsigned char GPIO_IF_Get(unsigned char ucPin,
+             unsigned int uiGPIOPort,
+             unsigned char ucGPIOPin);
+extern void GPIO_IF_LedConfigure(unsigned char ucPins);
+extern void GPIO_IF_LedOn(char ledNum);
+extern void GPIO_IF_LedOff(char ledNum);
+extern unsigned char GPIO_IF_LedStatus(unsigned char ucGPIONum);
+extern void GPIO_IF_LedToggle(unsigned char ucLedNum);
 //*****************************************************************************
 //
 // Mark the end of the C bindings section for C++ compilers.
@@ -90,5 +111,5 @@ extern int Report(const char *format, ...);
 }
 #endif
 
-#endif
+#endif //  __GPIOIF_H__
 

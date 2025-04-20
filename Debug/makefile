@@ -6,18 +6,24 @@ SHELL = cmd.exe
 
 CG_TOOL_ROOT := C:/ti/ccsv8/tools/compiler/ti-cgt-arm_20.2.7.LTS
 
-GEN_OPTS__FLAG := 
-GEN_CMDS__FLAG := 
+GEN_OPTS += C:/ti/CC3200SDK_1.5.0/cc3200-sdk/ti_rtos/ti_rtos_config/ccs/Default/configPkg/compiler.opt
+GEN_OPTS__FLAG := --cmd_file="C:/ti/CC3200SDK_1.5.0/cc3200-sdk/ti_rtos/ti_rtos_config/ccs/Default/configPkg/compiler.opt"
+GEN_CMDS += C:/ti/CC3200SDK_1.5.0/cc3200-sdk/ti_rtos/ti_rtos_config/ccs/Default/configPkg/linker.cmd
+GEN_CMDS__FLAG := -l"C:/ti/CC3200SDK_1.5.0/cc3200-sdk/ti_rtos/ti_rtos_config/ccs/Default/configPkg/linker.cmd"
 
 ORDERED_OBJS += \
 "./ir.obj" \
+"./ir_gpio_if.obj" \
+"./ir_networkcomon.obj" \
 "./ir_uart.obj" \
+"./ir_wifi.obj" \
 "./main.obj" \
 "./peripheral_test.obj" \
 "./startup_ccs.obj" \
 "../cc3200v1p32.cmd" \
 $(GEN_CMDS__FLAG) \
--l"C:/ti/ccsv8/tools/compiler/ti-cgt-arm_20.2.7.LTS/lib/libc.a" \
+-l"C:/ti/CC3200SDK_1.5.0/cc3200-sdk/oslib/ccs/ti_rtos/ti_rtos.a" \
+-l"C:/ti/CC3200SDK_1.5.0/cc3200-sdk/simplelink/ccs/OS_debug/simplelink.a" \
 -l"C:/ti/CC3200SDK_1.5.0/cc3200-sdk/driverlib/ccs/Release/driverlib.a" \
 -llibc.a \
 
@@ -142,11 +148,14 @@ BIN_OUTPUTS__QUOTED += \
 all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@$(MAKE) --no-print-directory -Onone "smart_ir_hub.out"
 
+dependents:
+	-cd C:/ti/CC3200SDK_1.5.0/cc3200-sdk/ti_rtos/ti_rtos_config/ccs/Default && $(MAKE) all
+
 # Tool invocations
-smart_ir_hub.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
+smart_ir_hub.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS) C:/ti/CC3200SDK_1.5.0/cc3200-sdk/ti_rtos/ti_rtos_config/ccs/Default/ti_rtos_config.lib
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: ARM Linker'
-	"C:/ti/ccsv8/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=vfplib -me --define=ccs --define=NON_NETWORK --define=cc3220 -g --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"smart_ir_hub.map" --heap_size=0x800 --stack_size=0x800 -i"C:/ti/ccsv8/tools/compiler/ti-cgt-arm_20.2.7.LTS/lib" -i"C:/ti/ccsv8/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="smart_ir_hub_linkInfo.xml" --rom_model -o "smart_ir_hub.out" $(ORDERED_OBJS)
+	"C:/ti/ccsv8/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=vfplib -me --define=ccs --define=SL_PLATFORM_MULTI_THREADED --define=USE_TIRTOS --define=cc3220 -g --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"smart_ir_hub.map" --heap_size=0x800 --stack_size=0x800 -i"C:/ti/tirtos_cc32xx_2_15_00_17/products/tidrivers_cc32xx_2_15_00_26/packages" -i"C:/ti/CC3200SDK_1.5.0/cc3200-sdk/simplelink_extlib/provisioninglib" -i"C:/ti/ccsv8/tools/compiler/ti-cgt-arm_20.2.7.LTS/lib" -i"C:/ti/tirtos_cc32xx_2_15_00_17/products/bios_6_45_00_20/packages" -i"C:/ti/tirtos_cc32xx_2_15_00_17/packages" -i"C:/ti/ccsv8/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="smart_ir_hub_linkInfo.xml" --rom_model -o "smart_ir_hub.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
@@ -160,13 +169,14 @@ smart_ir_hub.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "ir.obj" "ir_uart.obj" "main.obj" "peripheral_test.obj" "startup_ccs.obj" 
-	-$(RM) "ir.d" "ir_uart.d" "main.d" "peripheral_test.d" "startup_ccs.d" 
+	-$(RM) "ir.obj" "ir_gpio_if.obj" "ir_networkcomon.obj" "ir_uart.obj" "ir_wifi.obj" "main.obj" "peripheral_test.obj" "startup_ccs.obj" 
+	-$(RM) "ir.d" "ir_gpio_if.d" "ir_networkcomon.d" "ir_uart.d" "ir_wifi.d" "main.d" "peripheral_test.d" "startup_ccs.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
 .PHONY: all clean dependents
 .SECONDARY:
+C:/ti/CC3200SDK_1.5.0/cc3200-sdk/ti_rtos/ti_rtos_config/ccs/Default/ti_rtos_config.lib:
 
 -include ../makefile.targets
 

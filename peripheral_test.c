@@ -19,6 +19,11 @@
 #include "utils.h"
 #include "timer.h"
 #include "interrupt.h"
+#include "simplelink.h"
+#include "common.h"
+#include "uart.h"
+
+#include "osi.h"
 
 #include "ir_uart.h"
 
@@ -36,7 +41,15 @@
 #define SYS_CLK                 80000000
 #define MILLISECONDS_TO_TICKS(ms)   ((SYS_CLK/1000) * (ms))
 
+
+
 unsigned long g_ulTimerInts;
+
+
+
+
+
+
 
 uint8_t led_state = 0;
 
@@ -138,6 +151,5 @@ void TEST_UART(void)
 
     Message("UART test : Hello from CC32200 Launch pad!");
 }
-
 
 
