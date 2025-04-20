@@ -15,6 +15,7 @@
 
 #include "peripheral_test.h"
 #include "ir_wifi.h"
+#include "ir.h"
 #include "wlan.h"
 
 extern void (* const g_pfnVectors[])(void);
@@ -91,7 +92,8 @@ int main(void) {
 //    TEST_Timer();
 //    TEST_UART();
 //    TEST_WifiConnecitvity();
-    TEST_WifiConnectivity();
+//    TEST_WifiConnectivity();
+    StartIROperation();
 
     while(1);
 

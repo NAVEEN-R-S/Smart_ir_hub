@@ -27,6 +27,7 @@ main.obj: C:/ti/CC3200SDK_1.5.0/cc3200-sdk/driverlib/timer.h
 main.obj: C:/ti/CC3200SDK_1.5.0/cc3200-sdk/driverlib/interrupt.h
 main.obj: ../peripheral_test.h
 main.obj: ../ir_wifi.h
+main.obj: ../ir.h
 main.obj: C:/ti/CC3200SDK_1.5.0/cc3200-sdk/simplelink/include/wlan.h
 main.obj: C:/ti/CC3200SDK_1.5.0/cc3200-sdk/simplelink/include/simplelink.h
 main.obj: C:/ti/CC3200SDK_1.5.0/cc3200-sdk/simplelink/include/../user.h
@@ -74,6 +75,7 @@ C:/ti/CC3200SDK_1.5.0/cc3200-sdk/driverlib/timer.h:
 C:/ti/CC3200SDK_1.5.0/cc3200-sdk/driverlib/interrupt.h: 
 ../peripheral_test.h: 
 ../ir_wifi.h: 
+../ir.h: 
 C:/ti/CC3200SDK_1.5.0/cc3200-sdk/simplelink/include/wlan.h: 
 C:/ti/CC3200SDK_1.5.0/cc3200-sdk/simplelink/include/simplelink.h: 
 C:/ti/CC3200SDK_1.5.0/cc3200-sdk/simplelink/include/../user.h: 

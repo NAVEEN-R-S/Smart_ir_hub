@@ -9,7 +9,7 @@
 #define IR_H_
 
 
-
+void StartIROperation(void);
 
 
 #endif /* IR_H_ */
